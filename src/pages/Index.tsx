@@ -82,10 +82,6 @@ export default function Index() {
   const addToCart = (cheat: Cheat) => {
     if (!cart.find(item => item.id === cheat.id)) {
       setCart([...cart, cheat]);
-      toast({
-        title: 'Добавлено в корзину',
-        description: `${cheat.name} добавлен в корзину`,
-      });
     }
   };
 
@@ -274,7 +270,12 @@ export default function Index() {
         </Button>
       )}
 
-      <Dialog open={isCartOpen} onOpenChange={setIsCartOpen}>
+      <Dialog open={isCartOpen} onOpenChange={(open) => {
+        setIsCartOpen(open);
+        if (!open) {
+          setIsPaid(false);
+        }
+      }}>
         <DialogContent className="max-w-2xl bg-card">
           <DialogHeader>
             <DialogTitle className="text-3xl font-bold">
