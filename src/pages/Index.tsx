@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import Icon from '@/components/ui/icon';
 import { toast } from '@/hooks/use-toast';
 import confetti from 'canvas-confetti';
@@ -270,18 +270,18 @@ export default function Index() {
         </Button>
       )}
 
-      <Dialog open={isCartOpen} onOpenChange={(open) => {
+      <Sheet open={isCartOpen} onOpenChange={(open) => {
         setIsCartOpen(open);
         if (!open) {
           setIsPaid(false);
         }
       }}>
-        <DialogContent className="max-w-2xl bg-card">
-          <DialogHeader>
-            <DialogTitle className="text-3xl font-bold">
+        <SheetContent className="w-full sm:max-w-2xl bg-card overflow-y-auto">
+          <SheetHeader>
+            <SheetTitle className="text-3xl font-bold">
               {isPaid ? 'Успешная оплата! 🎉' : 'Корзина'}
-            </DialogTitle>
-          </DialogHeader>
+            </SheetTitle>
+          </SheetHeader>
           
           {isPaid ? (
             <div className="text-center py-8">
@@ -362,8 +362,8 @@ export default function Index() {
               )}
             </>
           )}
-        </DialogContent>
-      </Dialog>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }
